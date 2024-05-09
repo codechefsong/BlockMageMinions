@@ -3,7 +3,10 @@
 import { useState } from "react";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
+import deployedContracts from "~~/contracts/deployedContracts";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+
+const CHAIN_ID = 31337;
 
 const CreateMinion: NextPage = () => {
   const { address } = useAccount();
@@ -16,7 +19,20 @@ const CreateMinion: NextPage = () => {
     args: [address],
   });
 
+  const { data: tbaAddress } = useScaffoldReadContract({
+    contractName: "ERC6551Registry",
+    functionName: "account",
+    args: [
+      deployedContracts[CHAIN_ID].ERC6551Account.address,
+      BigInt(CHAIN_ID),
+      deployedContracts[CHAIN_ID].MinionNFT.address,
+      BigInt(selectedNFT),
+      BigInt("1"),
+    ],
+  });
+
   const { writeContractAsync: MinionNFT } = useScaffoldWriteContract("MinionNFT");
+  const { writeContractAsync: ERC6551Registry } = useScaffoldWriteContract("ERC6551Registry");
 
   return (
     <div className="flex items-center flex-col flex-grow pt-7">
@@ -24,6 +40,8 @@ const CreateMinion: NextPage = () => {
         <h1 className="text-center mb-5">
           <span className="block text-3xl mb-2">Select your wallet NFT</span>
         </h1>
+
+        <p>{tbaAddress}</p>
 
         <div className="flex">
           {nfts?.map((n, index) => (
@@ -40,7 +58,23 @@ const CreateMinion: NextPage = () => {
 
         <button
           className="py-2 px-16 mb-10 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
-          onClick={() => console.log("create")}
+          onClick={async () => {
+            try {
+              await ERC6551Registry({
+                functionName: "createAccount",
+                args: [
+                  deployedContracts[CHAIN_ID].ERC6551Account.address,
+                  BigInt(CHAIN_ID),
+                  deployedContracts[CHAIN_ID].MinionNFT.address,
+                  BigInt(selectedNFT),
+                  BigInt("1"),
+                  "0x",
+                ],
+              });
+            } catch (e) {
+              console.error("Error minting Minion:", e);
+            }
+          }}
         >
           Create Token Bound Account
         </button>

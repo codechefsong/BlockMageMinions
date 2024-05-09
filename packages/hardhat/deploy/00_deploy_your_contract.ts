@@ -32,6 +32,18 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     autoMine: true,
   });
 
+  await deploy("ERC6551Registry", {
+    from: deployer,
+    log: true,
+    autoMine: true,
+  });
+
+  await deploy("ERC6551Account", {
+    from: deployer,
+    log: true,
+    autoMine: true,
+  });
+
   await deploy("MinionNFT", {
     from: deployer,
     log: true,
