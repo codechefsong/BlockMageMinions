@@ -31,7 +31,7 @@ const CreateMinion: NextPage = () => {
     ],
   });
 
-  const { writeContractAsync: MinionNFT } = useScaffoldWriteContract("MinionNFT");
+  const { writeContractAsync: Game } = useScaffoldWriteContract("Game");
   const { writeContractAsync: ERC6551Registry } = useScaffoldWriteContract("ERC6551Registry");
 
   return (
@@ -86,9 +86,10 @@ const CreateMinion: NextPage = () => {
           className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
           onClick={async () => {
             try {
-              await MinionNFT({
-                functionName: "mint",
-                args: [address, ""],
+              await Game({
+                functionName: "createMinion",
+                // @ts-ignore
+                args: [""],
               });
             } catch (e) {
               console.error("Error minting Minion:", e);
