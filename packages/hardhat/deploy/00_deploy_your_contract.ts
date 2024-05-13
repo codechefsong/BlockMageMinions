@@ -28,6 +28,8 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     autoMine: true,
   });
 
+  const ERC6551Registry = await hre.ethers.getContract<Contract>("ERC6551Registry", deployer);
+
   await deploy("ERC6551Account", {
     from: deployer,
     log: true,
@@ -50,10 +52,24 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
 
   const RuneCredit = await hre.ethers.getContract<Contract>("RuneCredit", deployer);
 
+  await deploy("StaminaPoint", {
+    from: deployer,
+    log: true,
+    autoMine: true,
+  });
+
+  const StaminaPoint = await hre.ethers.getContract<Contract>("StaminaPoint", deployer);
+
   await deploy("Game", {
     from: deployer,
     // Contract constructor arguments
-    args: [deployer, await MinionNFT.getAddress(), await RuneCredit.getAddress()],
+    args: [
+      deployer,
+      await ERC6551Registry.getAddress(),
+      await MinionNFT.getAddress(),
+      await RuneCredit.getAddress(),
+      await StaminaPoint.getAddress(),
+    ],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.

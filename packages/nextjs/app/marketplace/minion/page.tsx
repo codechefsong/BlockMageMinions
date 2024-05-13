@@ -23,7 +23,7 @@ const CreateMinion: NextPage = () => {
     contractName: "ERC6551Registry",
     functionName: "account",
     args: [
-      deployedContracts[CHAIN_ID].ERC6551Account.address,
+      deployedContracts[CHAIN_ID].ERC6551Registry.address,
       BigInt(CHAIN_ID),
       deployedContracts[CHAIN_ID].MinionNFT.address,
       BigInt(selectedNFT),
@@ -89,7 +89,7 @@ const CreateMinion: NextPage = () => {
               await Game({
                 functionName: "createMinion",
                 // @ts-ignore
-                args: [""],
+                args: [BigInt(CHAIN_ID), "", BigInt("1")],
               });
             } catch (e) {
               console.error("Error minting Minion:", e);
