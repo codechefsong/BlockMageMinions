@@ -36,14 +36,18 @@ contract Game {
     _;
   }
 
-  function createMinion(
+  function createMinion(string calldata _tokenURI) public {
+    minionNFT.mint(msg.sender, _tokenURI);
+    runeCredit.mint(msg.sender, 10000000000000000000000);
+  }
+
+   function createTBA(
     uint256 _chainId,
     uint256 _salt,
-    string calldata _tokenURI
+    uint256 _tokenId,
+    bytes calldata _initData
   ) public {
-    uint256 tokenId = minionNFT.mint(msg.sender, _tokenURI);
-    address tba = registry.account(address(registry), _chainId, address(minionNFT), tokenId, _salt);
-    runeCredit.mint(msg.sender, 10000000000000000000000);
+    address tba = registry.createAccount(address(registry), _chainId, address(minionNFT), _tokenId, _salt, _initData);
     staminaPoint.mint(tba, 1000000000000000000000);
   }
 

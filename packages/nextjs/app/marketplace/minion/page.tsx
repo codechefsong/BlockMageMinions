@@ -31,8 +31,13 @@ const CreateMinion: NextPage = () => {
     ],
   });
 
+  const { data: sp } = useScaffoldReadContract({
+    contractName: "StaminaPoint",
+    functionName: "balanceOf",
+    args: [tbaAddress],
+  });
+
   const { writeContractAsync: Game } = useScaffoldWriteContract("Game");
-  const { writeContractAsync: ERC6551Registry } = useScaffoldWriteContract("ERC6551Registry");
 
   return (
     <div className="flex items-center flex-col flex-grow pt-7">
@@ -42,6 +47,7 @@ const CreateMinion: NextPage = () => {
         </h1>
 
         <p>{tbaAddress}</p>
+        <p>{sp?.toString()} SP</p>
 
         <div className="flex">
           {nfts?.map((n, index) => (
@@ -60,16 +66,9 @@ const CreateMinion: NextPage = () => {
           className="py-2 px-16 mb-10 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
           onClick={async () => {
             try {
-              await ERC6551Registry({
-                functionName: "createAccount",
-                args: [
-                  deployedContracts[CHAIN_ID].ERC6551Account.address,
-                  BigInt(CHAIN_ID),
-                  deployedContracts[CHAIN_ID].MinionNFT.address,
-                  BigInt(selectedNFT),
-                  BigInt("1"),
-                  "0x",
-                ],
+              await Game({
+                functionName: "createTBA",
+                args: [BigInt(CHAIN_ID), BigInt("1"), BigInt(selectedNFT), "0x"],
               });
             } catch (e) {
               console.error("Error minting Minion:", e);
@@ -89,7 +88,7 @@ const CreateMinion: NextPage = () => {
               await Game({
                 functionName: "createMinion",
                 // @ts-ignore
-                args: [BigInt(CHAIN_ID), "", BigInt("1")],
+                args: [""],
               });
             } catch (e) {
               console.error("Error minting Minion:", e);
