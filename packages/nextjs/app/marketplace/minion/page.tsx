@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { NextPage } from "next";
+import { formatEther } from "viem";
 import { useAccount } from "wagmi";
 import deployedContracts from "~~/contracts/deployedContracts";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
@@ -47,7 +48,13 @@ const CreateMinion: NextPage = () => {
         </h1>
 
         <p>{tbaAddress}</p>
-        <p>{sp?.toString()} SP</p>
+        <div className="text-xl">
+          Stamina Point:{" "}
+          <div className="inline-flex items-center justify-center">
+            {parseFloat(formatEther(sp || 0n)).toFixed(4)}
+            <span className="font-bold ml-1">SP</span>
+          </div>
+        </div>
 
         <div className="flex">
           {nfts?.map((n, index) => (

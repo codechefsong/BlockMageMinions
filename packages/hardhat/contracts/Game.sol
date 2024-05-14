@@ -15,7 +15,7 @@ contract Game {
   address public immutable owner;
   bool public premium = false;
   uint256 public totalCounter = 0;
-  mapping(address => uint) public userGreetingCounter;
+  mapping(address => address) public activeMinion;
 
   constructor(
     address _owner,
@@ -36,6 +36,10 @@ contract Game {
     _;
   }
 
+  function getActiveMinion(address _owner) public view returns (address) {
+    return activeMinion[_owner];
+  }
+
   function createMinion(string calldata _tokenURI) public {
     minionNFT.mint(msg.sender, _tokenURI);
     runeCredit.mint(msg.sender, 10000000000000000000000);
@@ -48,7 +52,8 @@ contract Game {
     bytes calldata _initData
   ) public {
     address tba = registry.createAccount(address(registry), _chainId, address(minionNFT), _tokenId, _salt, _initData);
-    staminaPoint.mint(tba, 1000000000000000000000);
+    staminaPoint.mint(tba, 100000000000000000000);
+    activeMinion[msg.sender] = tba;
   }
 
   function withdraw() public isOwner {
