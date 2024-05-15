@@ -38,20 +38,26 @@ const CreateMinion: NextPage = () => {
     args: [tbaAddress],
   });
 
+  const { data: usedsp } = useScaffoldReadContract({
+    contractName: "Game",
+    functionName: "getStaminaPointsLeft",
+    args: [tbaAddress],
+  });
+
   const { writeContractAsync: Game } = useScaffoldWriteContract("Game");
 
   return (
     <div className="flex items-center flex-col flex-grow pt-7">
       <div className="px-5">
         <h1 className="text-center mb-5">
-          <span className="block text-3xl mb-2">Select your wallet NFT</span>
+          <span className="block text-3xl mb-2">Select your Minion NFT</span>
         </h1>
 
         <p>{tbaAddress}</p>
         <div className="text-xl">
-          Stamina Point:{" "}
+          Stamina Point:{" "} {usedsp?.toString()} {" / "}
           <div className="inline-flex items-center justify-center">
-            {parseFloat(formatEther(sp || 0n)).toFixed(4)}
+            {parseFloat(formatEther(sp || 0n))}
             <span className="font-bold ml-1">SP</span>
           </div>
         </div>

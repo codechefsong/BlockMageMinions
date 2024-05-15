@@ -16,6 +16,7 @@ contract Game {
   bool public premium = false;
   uint256 public totalCounter = 0;
   mapping(address => address) public activeMinion;
+  mapping(address => uint256) public usedStaminaPoints;
 
   constructor(
     address _owner,
@@ -38,6 +39,11 @@ contract Game {
 
   function getActiveMinion(address _owner) public view returns (address) {
     return activeMinion[_owner];
+  }
+
+  function getStaminaPointsLeft(address _owner) public view returns (uint256) {
+    uint256 currentStaminaPoints = staminaPoint.balanceOf(_owner) - (usedStaminaPoints[_owner] * 1000000000000000000);
+    return currentStaminaPoints / 1000000000000000000;
   }
 
   function createMinion(string calldata _tokenURI) public {
