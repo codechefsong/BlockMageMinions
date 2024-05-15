@@ -20,8 +20,8 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/",
   },
   {
-    label: "Create Minion",
-    href: "/marketplace/minion",
+    label: "Explore",
+    href: "/explore",
     icon: <ShoppingBagIcon className="h-4 w-4" />,
   },
   {

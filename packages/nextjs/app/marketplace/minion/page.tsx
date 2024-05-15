@@ -55,7 +55,7 @@ const CreateMinion: NextPage = () => {
 
         <p>{tbaAddress}</p>
         <div className="text-xl">
-          Stamina Point:{" "} {usedsp?.toString()} {" / "}
+          Stamina Point: {usedsp?.toString()} {" / "}
           <div className="inline-flex items-center justify-center">
             {parseFloat(formatEther(sp || 0n))}
             <span className="font-bold ml-1">SP</span>
