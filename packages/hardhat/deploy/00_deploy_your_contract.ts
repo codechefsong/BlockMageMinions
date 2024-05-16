@@ -60,6 +60,14 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
 
   const StaminaPoint = await hre.ethers.getContract<Contract>("StaminaPoint", deployer);
 
+  await deploy("Items", {
+    from: deployer,
+    log: true,
+    autoMine: true,
+  });
+
+  const Items = await hre.ethers.getContract<Contract>("Items", deployer);
+
   await deploy("Game", {
     from: deployer,
     // Contract constructor arguments
@@ -69,6 +77,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
       await MinionNFT.getAddress(),
       await RuneCredit.getAddress(),
       await StaminaPoint.getAddress(),
+      await Items.getAddress(),
     ],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by

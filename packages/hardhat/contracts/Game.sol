@@ -5,12 +5,14 @@ import "./ERC6551Registry.sol";
 import "./MinionNFT.sol";
 import "./RuneCredit.sol";
 import "./StaminaPoint.sol";
+import "./Items.sol";
 
 contract Game {
   ERC6551Registry public registry;
   MinionNFT public minionNFT;
   RuneCredit public runeCredit;
   StaminaPoint public staminaPoint;
+  Items public items;
 
   address public immutable owner;
   bool public premium = false;
@@ -23,13 +25,15 @@ contract Game {
     address _registryAddress,
     address _minionNFTAddress,
     address _runeCreditAddress,
-    address _staminaPointAddress
+    address _staminaPointAddress,
+    address _itemAddress
   ) {
     owner = _owner;
     registry = ERC6551Registry(_registryAddress);
     minionNFT = MinionNFT(_minionNFTAddress);
     runeCredit = RuneCredit(_runeCreditAddress);
     staminaPoint = StaminaPoint(_staminaPointAddress);
+    items = Items(_itemAddress);
   }
 
   modifier isOwner() {
