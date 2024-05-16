@@ -37,6 +37,14 @@ contract Game {
     _;
   }
 
+  modifier hasEnoughSP(uint256 amount) {
+    address minionAddress = activeMinion[msg.sender];
+    uint256 usedAmount = usedStaminaPoints[minionAddress] + amount;
+    uint256 spAmount = staminaPoint.balanceOf(minionAddress);
+    require(usedAmount * 1000000000000000000 <= spAmount, "Not not SP");
+    _;
+  }
+
   function getActiveMinion(address _owner) public view returns (address) {
     return activeMinion[_owner];
   }
@@ -60,6 +68,12 @@ contract Game {
     address tba = registry.createAccount(address(registry), _chainId, address(minionNFT), _tokenId, _salt, _initData);
     staminaPoint.mint(tba, 100000000000000000000);
     activeMinion[msg.sender] = tba;
+  }
+
+  function trainMinionStamina() public hasEnoughSP(20){
+    address minionAddress = activeMinion[msg.sender];
+    usedStaminaPoints[minionAddress] += 20;
+    staminaPoint.mint(minionAddress, 1000000000000000000);
   }
 
   function withdraw() public isOwner {
