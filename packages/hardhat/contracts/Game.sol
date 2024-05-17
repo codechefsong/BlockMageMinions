@@ -80,6 +80,11 @@ contract Game {
     staminaPoint.mint(minionAddress, 1000000000000000000);
   }
 
+  function buyItem(uint _itemID) public {
+    runeCredit.burn(msg.sender, 10000000000000000);
+    items.mintItem(msg.sender, _itemID);
+  }
+
   function withdraw() public isOwner {
     (bool success, ) = owner.call{ value: address(this).balance }("");
     require(success, "Failed to send Ether");

@@ -21,6 +21,11 @@ const Explore: NextPage = () => {
             Train Minion
           </Link>
         </div>
+        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+          <Link href="/marketplace/item" passHref className="link">
+            Shop Item
+          </Link>
+        </div>
       </div>
     </div>
   );
