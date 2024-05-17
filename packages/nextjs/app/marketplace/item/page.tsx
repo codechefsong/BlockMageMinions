@@ -57,6 +57,20 @@ const ShopItem: NextPage = () => {
           >
             Buy
           </button>
+          <button
+            className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+            onClick={async () => {
+              try {
+                await Game({
+                  functionName: "useFoodItem",
+                });
+              } catch (e) {
+                console.error("Error buying Item:", e);
+              }
+            }}
+          >
+            Use
+          </button>
         </div>
         <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
           <h2>Stamina Potion</h2>

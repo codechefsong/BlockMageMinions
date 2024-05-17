@@ -14,4 +14,9 @@ contract Items is ERC1155 {
         if (_id == 1) _mint(_account, Food, 1, "");
         else if (_id == 2) _mint(_account, StaminaPotion, 1, "");
     }
+
+    function burnItem(address _account, uint256 _id) public {
+        if (_id == 1) _burn(_account, Food, 1);
+        else if (_id == 2) _burn(_account, StaminaPotion, 1);
+    }
 }

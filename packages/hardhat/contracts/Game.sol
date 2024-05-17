@@ -81,8 +81,18 @@ contract Game {
   }
 
   function buyItem(uint _itemID) public {
-    runeCredit.burn(msg.sender, 10000000000000000);
+    runeCredit.burn(msg.sender, 1000000000000000000);
     items.mintItem(msg.sender, _itemID);
+  }
+
+  function useFoodItem() public {
+    items.burnItem(msg.sender, 1);
+    address minionAddress = activeMinion[msg.sender];
+    if (usedStaminaPoints[minionAddress] >= 20) {
+      usedStaminaPoints[minionAddress] -= 20;
+    } else {
+      usedStaminaPoints[minionAddress] = 0;
+    }
   }
 
   function withdraw() public isOwner {
