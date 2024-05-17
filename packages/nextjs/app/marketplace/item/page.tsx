@@ -14,6 +14,18 @@ const ShopItem: NextPage = () => {
     args: [address],
   });
 
+  const { data: foodBalance } = useScaffoldReadContract({
+    contractName: "Items",
+    functionName: "balanceOf",
+    args: [address, BigInt("1")],
+  });
+
+  const { data: StaminaPotionBalance } = useScaffoldReadContract({
+    contractName: "Items",
+    functionName: "balanceOf",
+    args: [address, BigInt("2")],
+  });
+
   const { writeContractAsync: Game } = useScaffoldWriteContract("Game");
 
   return (
@@ -29,6 +41,7 @@ const ShopItem: NextPage = () => {
         <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
           <h2>Food</h2>
           <p>Restore 20 SP</p>
+          <p>Owned {foodBalance?.toString()}</p>
           <button
             className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
             onClick={async () => {
@@ -48,6 +61,7 @@ const ShopItem: NextPage = () => {
         <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
           <h2>Stamina Potion</h2>
           <p>Inscrease 1 SP</p>
+          <p>Owned {StaminaPotionBalance?.toString()}</p>
           <button
             className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
             onClick={async () => {
