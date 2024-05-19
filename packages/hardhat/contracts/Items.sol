@@ -7,7 +7,13 @@ contract Items is ERC1155 {
     uint256 public constant Food = 1;
     uint256 public constant StaminaPotion= 2;
 
+    uint256[] public price = [1, 10];
+
     constructor() ERC1155("") {
+    }
+
+    function getPrices() public view returns(uint256[] memory) {
+        return price;
     }
 
     function mintItem(address _account, uint256 _id) public {

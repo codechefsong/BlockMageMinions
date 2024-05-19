@@ -81,7 +81,8 @@ contract Game {
   }
 
   function buyItem(uint _itemID) public {
-    runeCredit.burn(msg.sender, 1000000000000000000);
+    uint256 cost = items.price(_itemID - 1);
+    runeCredit.burn(msg.sender, cost * 1000000000000000000);
     items.mintItem(msg.sender, _itemID);
   }
 
