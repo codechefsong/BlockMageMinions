@@ -71,7 +71,7 @@ const ShopItem: NextPage = () => {
                   functionName: "useFoodItem",
                 });
               } catch (e) {
-                console.error("Error buying Item:", e);
+                console.error("Error using Food Item:", e);
               }
             }}
           >
@@ -97,6 +97,20 @@ const ShopItem: NextPage = () => {
             }}
           >
             Buy
+          </button>
+          <button
+            className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+            onClick={async () => {
+              try {
+                await Game({
+                  functionName: "usePotionItem",
+                });
+              } catch (e) {
+                console.error("Error using Potion Item:", e);
+              }
+            }}
+          >
+            Use
           </button>
         </div>
       </div>

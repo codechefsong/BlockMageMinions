@@ -96,6 +96,12 @@ contract Game {
     }
   }
 
+  function usePotionItem() public {
+    items.burnItem(msg.sender, 2);
+    address minionAddress = activeMinion[msg.sender];
+    staminaPoint.mint(minionAddress, 1000000000000000000);
+  }
+
   function withdraw() public isOwner {
     (bool success, ) = owner.call{ value: address(this).balance }("");
     require(success, "Failed to send Ether");
