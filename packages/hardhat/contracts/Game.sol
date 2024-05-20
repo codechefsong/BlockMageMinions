@@ -5,6 +5,7 @@ import "./ERC6551Registry.sol";
 import "./MinionNFT.sol";
 import "./RuneCredit.sol";
 import "./StaminaPoint.sol";
+import "./MagicPoint.sol";
 import "./Items.sol";
 
 contract Game {
@@ -12,6 +13,7 @@ contract Game {
   MinionNFT public minionNFT;
   RuneCredit public runeCredit;
   StaminaPoint public staminaPoint;
+  MagicPoint public magicPoint;
   Items public items;
 
   address public immutable owner;
@@ -26,6 +28,7 @@ contract Game {
     address _minionNFTAddress,
     address _runeCreditAddress,
     address _staminaPointAddress,
+    address _magicPointAddress,
     address _itemAddress
   ) {
     owner = _owner;
@@ -33,6 +36,7 @@ contract Game {
     minionNFT = MinionNFT(_minionNFTAddress);
     runeCredit = RuneCredit(_runeCreditAddress);
     staminaPoint = StaminaPoint(_staminaPointAddress);
+    magicPoint = MagicPoint(_magicPointAddress);
     items = Items(_itemAddress);
   }
 
@@ -106,7 +110,6 @@ contract Game {
     (bool success, ) = owner.call{ value: address(this).balance }("");
     require(success, "Failed to send Ether");
   }
-
 
   receive() external payable {}
 }
