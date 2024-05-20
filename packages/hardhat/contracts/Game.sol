@@ -78,10 +78,15 @@ contract Game {
     activeMinion[msg.sender] = tba;
   }
 
-  function trainMinionStamina() public hasEnoughSP(20){
+  function trainMinion(uint8 trainType) public hasEnoughSP(20){
     address minionAddress = activeMinion[msg.sender];
     usedStaminaPoints[minionAddress] += 20;
-    staminaPoint.mint(minionAddress, 1000000000000000000);
+    if (trainType == 1) {
+      staminaPoint.mint(minionAddress, 1000000000000000000);
+    }
+    else if (trainType == 2) {
+      magicPoint.mint(minionAddress, 1000000000000000000);
+    }
   }
 
   function buyItem(uint _itemID) public {
