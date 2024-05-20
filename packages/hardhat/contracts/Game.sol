@@ -78,13 +78,13 @@ contract Game {
     activeMinion[msg.sender] = tba;
   }
 
-  function trainMinion(uint8 trainType) public hasEnoughSP(20){
+  function trainMinion(uint8 _trainType) public hasEnoughSP(20){
     address minionAddress = activeMinion[msg.sender];
     usedStaminaPoints[minionAddress] += 20;
-    if (trainType == 1) {
+    if (_trainType == 1) {
       staminaPoint.mint(minionAddress, 1000000000000000000);
     }
-    else if (trainType == 2) {
+    else if (_trainType == 2) {
       magicPoint.mint(minionAddress, 1000000000000000000);
     }
   }
@@ -105,10 +105,15 @@ contract Game {
     }
   }
 
-  function usePotionItem() public {
-    items.burnItem(msg.sender, 2);
+  function usePotionItem(uint8 _potionType) public {
+    items.burnItem(msg.sender, _potionType);
     address minionAddress = activeMinion[msg.sender];
-    staminaPoint.mint(minionAddress, 1000000000000000000);
+    if (_potionType == 2) {
+      staminaPoint.mint(minionAddress, 1000000000000000000);
+    }
+    else if (_potionType == 3) {
+      magicPoint.mint(minionAddress, 1000000000000000000);
+    }
   }
 
   function withdraw() public isOwner {
