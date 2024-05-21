@@ -74,8 +74,13 @@ contract Game {
     bytes calldata _initData
   ) public {
     address tba = registry.createAccount(address(registry), _chainId, address(minionNFT), _tokenId, _salt, _initData);
-    staminaPoint.mint(tba, 100000000000000000000);
     activeMinion[msg.sender] = tba;
+    if (staminaPoint.balanceOf(tba) == 0) {
+      staminaPoint.mint(tba, 100000000000000000000);
+    }
+    if (magicPoint.balanceOf(tba) == 0) {
+      magicPoint.mint(tba, 10000000000000000000);
+    }
   }
 
   function trainMinion(uint8 _trainType) public hasEnoughSP(20){
