@@ -57,7 +57,7 @@ const RestMinion: NextPage = () => {
           <span className="font-bold ml-1">MP</span>
         </div>
       </div>
-      {!isRest && (
+      {!isRest ? (
         <button
           className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
           onClick={async () => {
@@ -71,6 +71,21 @@ const RestMinion: NextPage = () => {
           }}
         >
           Put minion to sleep
+        </button>
+      ) : (
+        <button
+          className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+          onClick={async () => {
+            try {
+              await Game({
+                functionName: "wakeUpMinion",
+              });
+            } catch (e) {
+              console.error("Error awaking up Minion:", e);
+            }
+          }}
+        >
+          Awake up the minion
         </button>
       )}
     </div>

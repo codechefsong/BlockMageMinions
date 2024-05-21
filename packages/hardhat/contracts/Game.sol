@@ -136,6 +136,13 @@ contract Game {
     isRest[minionAddress] = true;
   }
 
+  function wakeUpMinion() public {
+    address minionAddress = activeMinion[msg.sender];
+    require(block.timestamp > restCoolDown[minionAddress] + COOLDOWNTIME, "Your minion is not awake yet");
+    isRest[minionAddress] = false;
+    usedStaminaPoints[minionAddress] = 0;
+  }
+
   function withdraw() public isOwner {
     (bool success, ) = owner.call{ value: address(this).balance }("");
     require(success, "Failed to send Ether");

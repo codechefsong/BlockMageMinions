@@ -315,7 +315,7 @@ const deployedContracts = {
       },
     },
     Game: {
-      address: "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
+      address: "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e",
       abi: [
         {
           inputs: [
@@ -713,6 +713,13 @@ const deployedContracts = {
             },
           ],
           stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "wakeUpMinion",
+          outputs: [],
+          stateMutability: "nonpayable",
           type: "function",
         },
         {
