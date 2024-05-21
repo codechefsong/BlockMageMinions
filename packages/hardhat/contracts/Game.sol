@@ -21,6 +21,10 @@ contract Game {
   uint256 public totalCounter = 0;
   mapping(address => address) public activeMinion;
   mapping(address => uint256) public usedStaminaPoints;
+  mapping(address => uint256) public restCoolDown;
+  mapping(address => bool) public isRest;
+
+  uint256 public constant COOLDOWNTIME = 100;
 
   constructor(
     address _owner,
@@ -60,6 +64,11 @@ contract Game {
   function getStaminaPointsLeft(address _owner) public view returns (uint256) {
     uint256 currentStaminaPoints = staminaPoint.balanceOf(_owner) - (usedStaminaPoints[_owner] * 1000000000000000000);
     return currentStaminaPoints / 1000000000000000000;
+  }
+
+  function getIsRest(address _owner) public view returns (bool) {
+    address minionAddress = activeMinion[_owner];
+    return isRest[minionAddress];
   }
 
   function createMinion(string calldata _tokenURI) public {
@@ -119,6 +128,12 @@ contract Game {
     else if (_potionType == 3) {
       magicPoint.mint(minionAddress, 1000000000000000000);
     }
+  }
+
+  function restMinion() public {
+    address minionAddress = activeMinion[msg.sender];
+    restCoolDown[minionAddress] = block.timestamp;
+    isRest[minionAddress] = true;
   }
 
   function withdraw() public isOwner {
