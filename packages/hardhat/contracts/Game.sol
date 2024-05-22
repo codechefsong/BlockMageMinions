@@ -6,6 +6,7 @@ import "./MinionNFT.sol";
 import "./RuneCredit.sol";
 import "./StaminaPoint.sol";
 import "./MagicPoint.sol";
+import "./DefensePoint.sol";
 import "./Items.sol";
 
 contract Game {
@@ -14,6 +15,7 @@ contract Game {
   RuneCredit public runeCredit;
   StaminaPoint public staminaPoint;
   MagicPoint public magicPoint;
+  DefensePoint public defensePoint;
   Items public items;
 
   address public immutable owner;
@@ -33,6 +35,7 @@ contract Game {
     address _runeCreditAddress,
     address _staminaPointAddress,
     address _magicPointAddress,
+    address _defensePointAddress,
     address _itemAddress
   ) {
     owner = _owner;
@@ -41,6 +44,7 @@ contract Game {
     runeCredit = RuneCredit(_runeCreditAddress);
     staminaPoint = StaminaPoint(_staminaPointAddress);
     magicPoint = MagicPoint(_magicPointAddress);
+    defensePoint = DefensePoint(_defensePointAddress);
     items = Items(_itemAddress);
   }
 

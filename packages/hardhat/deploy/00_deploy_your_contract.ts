@@ -68,6 +68,14 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
 
   const MagicPoint = await hre.ethers.getContract<Contract>("MagicPoint", deployer);
 
+  await deploy("DefensePoint", {
+    from: deployer,
+    log: true,
+    autoMine: true,
+  });
+
+  const DefensePoint = await hre.ethers.getContract<Contract>("DefensePoint", deployer);
+
   await deploy("Items", {
     from: deployer,
     log: true,
@@ -86,6 +94,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
       await RuneCredit.getAddress(),
       await StaminaPoint.getAddress(),
       await MagicPoint.getAddress(),
+      await DefensePoint.getAddress(),
       await Items.getAddress(),
     ],
     log: true,
