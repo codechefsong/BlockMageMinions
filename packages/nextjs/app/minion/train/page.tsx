@@ -95,6 +95,21 @@ const TrainMinion: NextPage = () => {
       >
         Train Magic
       </button>
+      <button
+        className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+        onClick={async () => {
+          try {
+            await Game({
+              functionName: "trainMinion",
+              args: [3],
+            });
+          } catch (e) {
+            console.error("Error training Minion defense:", e);
+          }
+        }}
+      >
+        Train Defense
+      </button>
     </div>
   );
 };

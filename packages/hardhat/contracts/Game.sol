@@ -108,6 +108,9 @@ contract Game {
     else if (_trainType == 2) {
       magicPoint.mint(minionAddress, 1000000000000000000);
     }
+    else if (_trainType == 3) {
+      defensePoint.mint(minionAddress, 1000000000000000000);
+    }
   }
 
   function buyItem(uint _itemID) public {
