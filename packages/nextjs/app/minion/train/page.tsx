@@ -26,6 +26,12 @@ const TrainMinion: NextPage = () => {
     args: [tbaAddress],
   });
 
+  const { data: dp } = useScaffoldReadContract({
+    contractName: "DefensePoint",
+    functionName: "balanceOf",
+    args: [tbaAddress],
+  });
+
   const { data: usedsp } = useScaffoldReadContract({
     contractName: "Game",
     functionName: "getStaminaPointsLeft",
@@ -49,6 +55,13 @@ const TrainMinion: NextPage = () => {
         <div className="inline-flex items-center justify-center">
           {parseFloat(formatEther(mp || 0n))}
           <span className="font-bold ml-1">MP</span>
+        </div>
+      </div>
+      <div className="text-xl">
+        Defense Point:{" "}
+        <div className="inline-flex items-center justify-center">
+          {parseFloat(formatEther(dp || 0n))}
+          <span className="font-bold ml-1">DP</span>
         </div>
       </div>
       <p>Cost 20 SP</p>

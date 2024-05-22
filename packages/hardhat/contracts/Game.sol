@@ -94,6 +94,9 @@ contract Game {
     if (magicPoint.balanceOf(tba) == 0) {
       magicPoint.mint(tba, 10000000000000000000);
     }
+    if (defensePoint.balanceOf(tba) == 0) {
+      defensePoint.mint(tba, 10000000000000000000);
+    }
   }
 
   function trainMinion(uint8 _trainType) public hasEnoughSP(20){
