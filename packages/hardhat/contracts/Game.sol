@@ -138,6 +138,9 @@ contract Game {
     else if (_potionType == 3) {
       magicPoint.mint(minionAddress, 1000000000000000000);
     }
+    else if (_potionType == 4) {
+      defensePoint.mint(minionAddress, 1000000000000000000);
+    }
   }
 
   function restMinion() public {

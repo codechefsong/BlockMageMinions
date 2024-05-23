@@ -32,6 +32,12 @@ const ShopItem: NextPage = () => {
     args: [address, BigInt("3")],
   });
 
+  const { data: DefensePotionBalance } = useScaffoldReadContract({
+    contractName: "Items",
+    functionName: "balanceOf",
+    args: [address, BigInt("4")],
+  });
+
   const { data: prices } = useScaffoldReadContract({
     contractName: "Items",
     functionName: "getPrices",
@@ -147,6 +153,42 @@ const ShopItem: NextPage = () => {
                 await Game({
                   functionName: "usePotionItem",
                   args: [3],
+                });
+              } catch (e) {
+                console.error("Error using Potion Item:", e);
+              }
+            }}
+          >
+            Use
+          </button>
+        </div>
+        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+          <h2>Defense Potion</h2>
+          <p>Inscrease 1 DP</p>
+          <p>Cost: {prices && prices[3]?.toString()} RC</p>
+          <p>Owned {DefensePotionBalance?.toString()}</p>
+          <button
+            className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+            onClick={async () => {
+              try {
+                await Game({
+                  functionName: "buyItem",
+                  args: [BigInt("4")],
+                });
+              } catch (e) {
+                console.error("Error buying Item:", e);
+              }
+            }}
+          >
+            Buy
+          </button>
+          <button
+            className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+            onClick={async () => {
+              try {
+                await Game({
+                  functionName: "usePotionItem",
+                  args: [4],
                 });
               } catch (e) {
                 console.error("Error using Potion Item:", e);
