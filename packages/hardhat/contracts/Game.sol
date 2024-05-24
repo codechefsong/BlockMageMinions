@@ -122,8 +122,8 @@ contract Game {
   function useFoodItem() public {
     items.burnItem(msg.sender, 1);
     address minionAddress = activeMinion[msg.sender];
-    if (usedStaminaPoints[minionAddress] >= 20) {
-      usedStaminaPoints[minionAddress] -= 20;
+    if (usedStaminaPoints[minionAddress] >= 100) {
+      usedStaminaPoints[minionAddress] -= 100;
     } else {
       usedStaminaPoints[minionAddress] = 0;
     }
@@ -163,13 +163,13 @@ contract Game {
     uint256 randomNumber = uint256(keccak256(abi.encode(block.timestamp, msg.sender))) % 10;
 
     if (randomNumber > 8) {
-      items.mintItem(msg.sender, 7);
+      items.mintMaterials(msg.sender, 7, 1);
     }
     else if (randomNumber > 5) {
-      items.mintItem(msg.sender, 6);
+      items.mintMaterials(msg.sender, 6, 1);
     }
     else {
-      items.mintItem(msg.sender, 5);
+      items.mintMaterials(msg.sender, 5, 1);
     }
   }
 
