@@ -156,6 +156,23 @@ contract Game {
     usedStaminaPoints[minionAddress] = 0;
   }
 
+  function gatherMaterials() public {
+    address minionAddress = activeMinion[msg.sender];
+    usedStaminaPoints[minionAddress] += 50;
+
+    uint256 randomNumber = uint256(keccak256(abi.encode(block.timestamp, msg.sender))) % 10;
+
+    if (randomNumber > 8) {
+      items.mintItem(msg.sender, 7);
+    }
+    else if (randomNumber > 5) {
+      items.mintItem(msg.sender, 6);
+    }
+    else {
+      items.mintItem(msg.sender, 5);
+    }
+  }
+
   function withdraw() public isOwner {
     (bool success, ) = owner.call{ value: address(this).balance }("");
     require(success, "Failed to send Ether");
