@@ -3,7 +3,18 @@
 import type { NextPage } from "next";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
-import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import {
+  useScaffoldReadContract,
+  useScaffoldWatchContractEvent,
+  useScaffoldWriteContract,
+} from "~~/hooks/scaffold-eth";
+import { notification } from "~~/utils/scaffold-eth";
+
+const itemName = {
+  "5": "Wood",
+  "6": "Iron",
+  "7": "Steel",
+};
 
 const GatherMaterials: NextPage = () => {
   const { address } = useAccount();
@@ -46,6 +57,21 @@ const GatherMaterials: NextPage = () => {
 
   const { writeContractAsync: Game } = useScaffoldWriteContract("Game");
 
+  useScaffoldWatchContractEvent({
+    contractName: "Game",
+    eventName: "NewMaterial",
+    onLogs: logs => {
+      logs.map(log => {
+        const { owner, itemID } = log.args;
+        console.log(owner, itemID);
+        if (address === owner) {
+          // @ts-ignore
+          notification.info("You found " + itemName[itemID]);
+        }
+      });
+    },
+  });
+
   return (
     <div className="flex items-center flex-col flex-grow pt-7">
       <h1>Gather Materials {tbaAddress}</h1>
@@ -56,6 +82,7 @@ const GatherMaterials: NextPage = () => {
           <span className="font-bold ml-1">SP</span>
         </div>
       </div>
+      <p>Cost 50 SP</p>
       <button
         className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
         onClick={async () => {

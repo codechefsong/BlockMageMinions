@@ -28,6 +28,8 @@ contract Game {
 
   uint256 public constant COOLDOWNTIME = 100;
 
+  event NewMaterial(address indexed owner, uint8 itemID, uint8 amount);
+
   constructor(
     address _owner,
     address _registryAddress,
@@ -164,12 +166,15 @@ contract Game {
 
     if (randomNumber > 8) {
       items.mintMaterials(msg.sender, 7, 1);
+      emit NewMaterial(msg.sender, 7, 1);
     }
     else if (randomNumber > 5) {
       items.mintMaterials(msg.sender, 6, 1);
+      emit NewMaterial(msg.sender, 6, 1);
     }
     else {
       items.mintMaterials(msg.sender, 5, 1);
+      emit NewMaterial(msg.sender, 5, 1);
     }
   }
 
