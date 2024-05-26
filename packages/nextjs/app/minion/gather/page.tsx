@@ -3,6 +3,7 @@
 import type { NextPage } from "next";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
+import { BackButton } from "~~/components/ui/BackButton";
 import {
   useScaffoldReadContract,
   useScaffoldWatchContractEvent,
@@ -73,42 +74,45 @@ const GatherMaterials: NextPage = () => {
   });
 
   return (
-    <div className="flex items-center flex-col flex-grow pt-7">
-      <h1>Gather Materials {tbaAddress}</h1>
-      <div className="text-xl">
-        Stamina Point: {usedsp?.toString()} {" / "}
-        <div className="inline-flex items-center justify-center">
-          {parseFloat(formatEther(sp || 0n))}
-          <span className="font-bold ml-1">SP</span>
+    <div>
+      <BackButton />
+      <div className="flex items-center flex-col flex-grow pt-7">
+        <h1>Gather Materials {tbaAddress}</h1>
+        <div className="text-xl">
+          Stamina Point: {usedsp?.toString()} {" / "}
+          <div className="inline-flex items-center justify-center">
+            {parseFloat(formatEther(sp || 0n))}
+            <span className="font-bold ml-1">SP</span>
+          </div>
         </div>
-      </div>
-      <p>Cost 50 SP</p>
-      <button
-        className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
-        onClick={async () => {
-          try {
-            await Game({
-              functionName: "gatherMaterials",
-            });
-          } catch (e) {
-            console.error("Error gathering materials", e);
-          }
-        }}
-      >
-        Gather Material
-      </button>
-      <div className="flex">
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
-          <h2>Wood</h2>
-          <p>Owned {woodBalance?.toString()}</p>
-        </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
-          <h2>Iron</h2>
-          <p>Owned {ironBalance?.toString()}</p>
-        </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
-          <h2>Steel</h2>
-          <p>Owned {steelBalance?.toString()}</p>
+        <p>Cost 50 SP</p>
+        <button
+          className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+          onClick={async () => {
+            try {
+              await Game({
+                functionName: "gatherMaterials",
+              });
+            } catch (e) {
+              console.error("Error gathering materials", e);
+            }
+          }}
+        >
+          Gather Material
+        </button>
+        <div className="flex">
+          <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+            <h2>Wood</h2>
+            <p>Owned {woodBalance?.toString()}</p>
+          </div>
+          <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+            <h2>Iron</h2>
+            <p>Owned {ironBalance?.toString()}</p>
+          </div>
+          <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+            <h2>Steel</h2>
+            <p>Owned {steelBalance?.toString()}</p>
+          </div>
         </div>
       </div>
     </div>
