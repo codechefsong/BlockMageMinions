@@ -50,7 +50,7 @@ const CreateMinion: NextPage = () => {
   return (
     <div>
       <BackButton />
-      <div className="flex items-center flex-col flex-grow pt-7">
+      <div className="flex items-center flex-col flex-grow">
         <div className="px-5">
           <h1 className="text-center mb-5">
             <span className="block text-3xl mb-2">Select your Minion NFT</span>

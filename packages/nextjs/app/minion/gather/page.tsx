@@ -76,7 +76,7 @@ const GatherMaterials: NextPage = () => {
   return (
     <div>
       <BackButton />
-      <div className="flex items-center flex-col flex-grow pt-7">
+      <div className="flex items-center flex-col flex-grow">
         <h1>Gather Materials {tbaAddress}</h1>
         <div className="text-xl">
           Stamina Point: {usedsp?.toString()} {" / "}

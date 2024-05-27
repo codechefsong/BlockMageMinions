@@ -49,7 +49,7 @@ const ShopItem: NextPage = () => {
   return (
     <div>
       <BackButton />
-      <div className="flex items-center flex-col flex-grow pt-7">
+      <div className="flex items-center flex-col flex-grow">
         <h1 className="text-2xl">Welcome to the Item Shop</h1>
         <div className="text-xl">
           <div className="inline-flex items-center justify-center">
