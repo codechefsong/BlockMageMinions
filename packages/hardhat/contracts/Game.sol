@@ -121,6 +121,12 @@ contract Game {
     items.mintItem(msg.sender, _itemID);
   }
 
+  function sellMaterial(uint _materialID) public {
+    uint256 cost = items.sellPrice(_materialID - 1 - 4);
+    runeCredit.mint(msg.sender, cost * 1000000000000000000);
+    items.burnMaterials(msg.sender, _materialID, 1);
+  }
+
   function useFoodItem() public {
     items.burnItem(msg.sender, 1);
     address minionAddress = activeMinion[msg.sender];
