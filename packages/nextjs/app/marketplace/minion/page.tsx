@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import type { NextPage } from "next";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
@@ -73,7 +74,13 @@ const CreateMinion: NextPage = () => {
                 style={{ background: selectedNFT === index ? "#00cc99" : "white" }}
                 onClick={() => setSelectNFT(index)}
               >
-                {n.id.toString()}
+                <Image
+                  className="mb-3"
+                  src="https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmZx4FuZqqSQ9f3MMnsX46ts4RXufRSMAH2byyYy9bqPkH"
+                  width={200}
+                  height={200}
+                  alt="Minions"
+                />
               </div>
             ))}
           </div>
@@ -97,22 +104,32 @@ const CreateMinion: NextPage = () => {
             <span className="block text-2xl mb-2">Buy a Minion NFT</span>
           </h1>
 
-          <button
-            className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
-            onClick={async () => {
-              try {
-                await Game({
-                  functionName: "createMinion",
-                  // @ts-ignore
-                  args: [""],
-                });
-              } catch (e) {
-                console.error("Error minting Minion:", e);
-              }
-            }}
-          >
-            Buy
-          </button>
+          <center>
+            <Image
+              className="mb-3"
+              src="https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmZx4FuZqqSQ9f3MMnsX46ts4RXufRSMAH2byyYy9bqPkH"
+              width={200}
+              height={200}
+              alt="Minions"
+            />
+
+            <button
+              className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+              onClick={async () => {
+                try {
+                  await Game({
+                    functionName: "createMinion",
+                    // @ts-ignore
+                    args: [""],
+                  });
+                } catch (e) {
+                  console.error("Error minting Minion:", e);
+                }
+              }}
+            >
+              Buy
+            </button>
+          </center>
         </div>
       </div>
     </div>
