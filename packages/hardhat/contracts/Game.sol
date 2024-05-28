@@ -164,7 +164,7 @@ contract Game {
     usedStaminaPoints[minionAddress] = 0;
   }
 
-  function gatherMaterials() public {
+  function gatherMaterials() public hasEnoughSP(50) {
     address minionAddress = activeMinion[msg.sender];
     usedStaminaPoints[minionAddress] += 50;
 
@@ -182,6 +182,21 @@ contract Game {
       items.mintMaterials(msg.sender, 5, 1);
       emit NewMaterial(msg.sender, 5, 1);
     }
+  }
+
+  function attackThief() hasEnoughSP(5) public {
+    address minionAddress = activeMinion[msg.sender];
+
+    uint256 defense = defensePoint.balanceOf(minionAddress) / 1000000000000000000;
+
+    if (defense >= 45) {
+      usedStaminaPoints[minionAddress] += 5;
+    } else {
+      uint256 cost = 50 - (defensePoint.balanceOf(minionAddress) / 1000000000000000000);
+      usedStaminaPoints[minionAddress] += cost;
+    }
+    
+    runeCredit.mint(msg.sender, magicPoint.balanceOf(minionAddress));
   }
 
   function withdraw() public isOwner {
