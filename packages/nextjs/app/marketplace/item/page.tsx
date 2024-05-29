@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { NextPage } from "next";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
@@ -94,6 +95,13 @@ const ShopItem: NextPage = () => {
             </button>
           </div>
           <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+            <Image
+              className="mb-3"
+              src="https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmaDdD6ZXTGGtnzfdWBo5Dt1EGZZYiTxG12kBUCPSBc32u"
+              width={150}
+              height={150}
+              alt="Stamina Potion"
+            />
             <h2>Stamina Potion</h2>
             <p>Inscrease 1 SP</p>
             <p>Cost: {prices && prices[1]?.toString()} RC</p>
@@ -130,6 +138,13 @@ const ShopItem: NextPage = () => {
             </button>
           </div>
           <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+            <Image
+              className="mb-3"
+              src="https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmPAZNhLXAhw9dfj2twaDqJC2m5eZYuRUSmZHX48HiK7aC"
+              width={150}
+              height={150}
+              alt="Magic Potion"
+            />
             <h2>Magic Potion</h2>
             <p>Inscrease 1 MP</p>
             <p>Cost: {prices && prices[2]?.toString()} RC</p>
@@ -166,6 +181,13 @@ const ShopItem: NextPage = () => {
             </button>
           </div>
           <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+            <Image
+              className="mb-3"
+              src="https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmP8tvy1kM6MFBABoNuDfoyVZDb7RXFd7AHqYaSZBktqcJ"
+              width={150}
+              height={150}
+              alt="Defense Potion"
+            />
             <h2>Defense Potion</h2>
             <p>Inscrease 1 DP</p>
             <p>Cost: {prices && prices[3]?.toString()} RC</p>

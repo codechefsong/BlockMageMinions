@@ -28,9 +28,9 @@ contract Items is ERC1155 {
 
     function mintItem(address _account, uint256 _id) public {
         if (_id == 1) _mint(_account, Food, 1, "");
-        else if (_id == 2) _mint(_account, StaminaPotion, 1, "");
-        else if (_id == 3) _mint(_account, MagicPotion, 1, "");
-        else if (_id == 4) _mint(_account, DefensePotion, 1, "");
+        else if (_id == 2) _mint(_account, StaminaPotion, 1, "https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmaDdD6ZXTGGtnzfdWBo5Dt1EGZZYiTxG12kBUCPSBc32u");
+        else if (_id == 3) _mint(_account, MagicPotion, 1, "https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmPAZNhLXAhw9dfj2twaDqJC2m5eZYuRUSmZHX48HiK7aC");
+        else if (_id == 4) _mint(_account, DefensePotion, 1, "https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmP8tvy1kM6MFBABoNuDfoyVZDb7RXFd7AHqYaSZBktqcJ");
     }
 
     function mintMaterials(address _account, uint256 _id, uint256 _amount) public {
