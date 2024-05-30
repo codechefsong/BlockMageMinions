@@ -29,6 +29,7 @@ contract Game {
   uint256 public constant COOLDOWNTIME = 100;
 
   event NewMaterial(address indexed owner, uint8 itemID, uint8 amount);
+  event EaredCreditFromThief(address indexed owner, uint256 amount);
 
   constructor(
     address _owner,
@@ -197,6 +198,7 @@ contract Game {
     }
     
     runeCredit.mint(msg.sender, magicPoint.balanceOf(minionAddress));
+    emit EaredCreditFromThief(msg.sender, magicPoint.balanceOf(minionAddress));
   }
 
   function withdraw() public isOwner {

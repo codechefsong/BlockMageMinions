@@ -5,7 +5,12 @@ import type { NextPage } from "next";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
 import { BackButton } from "~~/components/ui/BackButton";
-import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import {
+  useScaffoldReadContract,
+  useScaffoldWatchContractEvent,
+  useScaffoldWriteContract,
+} from "~~/hooks/scaffold-eth";
+import { notification } from "~~/utils/scaffold-eth";
 
 const RestMinion: NextPage = () => {
   const { address } = useAccount();
@@ -41,6 +46,21 @@ const RestMinion: NextPage = () => {
   });
 
   const { writeContractAsync: Game } = useScaffoldWriteContract("Game");
+
+  useScaffoldWatchContractEvent({
+    contractName: "Game",
+    eventName: "EaredCreditFromThief",
+    onLogs: logs => {
+      logs.map(log => {
+        const { owner, amount } = log.args;
+        console.log(owner, amount);
+        if (address === owner) {
+          // @ts-ignore
+          notification.info("You earned " + amount / 10 ** 18 + "RC");
+        }
+      });
+    },
+  });
 
   return (
     <div>
