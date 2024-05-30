@@ -27,12 +27,6 @@ const RestMinion: NextPage = () => {
     args: [tbaAddress],
   });
 
-  const { data: mp } = useScaffoldReadContract({
-    contractName: "MagicPoint",
-    functionName: "balanceOf",
-    args: [tbaAddress],
-  });
-
   const { data: usedsp } = useScaffoldReadContract({
     contractName: "Game",
     functionName: "getStaminaPointsLeft",
@@ -51,13 +45,6 @@ const RestMinion: NextPage = () => {
           <div className="inline-flex items-center justify-center">
             {parseFloat(formatEther(sp || 0n))}
             <span className="font-bold ml-1">SP</span>
-          </div>
-        </div>
-        <div className="text-xl">
-          Magic Point:{" "}
-          <div className="inline-flex items-center justify-center">
-            {parseFloat(formatEther(mp || 0n))}
-            <span className="font-bold ml-1">MP</span>
           </div>
         </div>
         {!isRest ? (

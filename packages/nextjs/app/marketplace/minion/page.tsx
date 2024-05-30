@@ -52,19 +52,54 @@ const CreateMinion: NextPage = () => {
     <div>
       <BackButton />
       <div className="flex items-center flex-col flex-grow">
-        <div className="px-5">
+        <h1 className="text-center mb-5">
+          <span className="block text-3xl mb-2">Buy a Minion NFT</span>
+        </h1>
+
+        <center>
+          <Image
+            className="mb-3"
+            src="https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmZx4FuZqqSQ9f3MMnsX46ts4RXufRSMAH2byyYy9bqPkH"
+            width={150}
+            height={150}
+            alt="Minions"
+          />
+
+          <button
+            className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+            onClick={async () => {
+              try {
+                await Game({
+                  functionName: "createMinion",
+                  // @ts-ignore
+                  args: [""],
+                });
+              } catch (e) {
+                console.error("Error minting Minion:", e);
+              }
+            }}
+          >
+            Buy
+          </button>
+        </center>
+
+        <div className="px-5 mt-5">
           <h1 className="text-center mb-5">
             <span className="block text-3xl mb-2">Select your Minion NFT</span>
           </h1>
 
-          <p>{tbaAddress}</p>
-          <div className="text-xl">
-            Stamina Point: {usedsp?.toString()} {" / "}
-            <div className="inline-flex items-center justify-center">
-              {parseFloat(formatEther(sp || 0n))}
-              <span className="font-bold ml-1">SP</span>
+          {selectedNFT != -1 && (
+            <div>
+              <p>{tbaAddress}</p>
+              <div className="text-xl">
+                Stamina Point: {usedsp?.toString()} {" / "}
+                <div className="inline-flex items-center justify-center">
+                  {parseFloat(formatEther(sp || 0n))}
+                  <span className="font-bold ml-1">SP</span>
+                </div>
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="flex">
             {nfts?.map((n, index) => (
@@ -85,49 +120,21 @@ const CreateMinion: NextPage = () => {
             ))}
           </div>
 
-          <button
-            className="py-2 px-16 mb-10 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
-            onClick={async () => {
-              try {
-                await Game({
-                  functionName: "createTBA",
-                  args: [BigInt(CHAIN_ID), BigInt("1"), BigInt(selectedNFT), "0x"],
-                });
-              } catch (e) {
-                console.error("Error minting Minion:", e);
-              }
-            }}
-          >
-            Create Token Bound Account
-          </button>
-          <h1 className="text-center mb-5">
-            <span className="block text-2xl mb-2">Buy a Minion NFT</span>
-          </h1>
-
           <center>
-            <Image
-              className="mb-3"
-              src="https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmZx4FuZqqSQ9f3MMnsX46ts4RXufRSMAH2byyYy9bqPkH"
-              width={200}
-              height={200}
-              alt="Minions"
-            />
-
             <button
-              className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+              className="py-2 px-16 mb-10 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
               onClick={async () => {
                 try {
                   await Game({
-                    functionName: "createMinion",
-                    // @ts-ignore
-                    args: [""],
+                    functionName: "createTBA",
+                    args: [BigInt(CHAIN_ID), BigInt("1"), BigInt(selectedNFT), "0x"],
                   });
                 } catch (e) {
                   console.error("Error minting Minion:", e);
                 }
               }}
             >
-              Buy
+              Set Active
             </button>
           </center>
         </div>
