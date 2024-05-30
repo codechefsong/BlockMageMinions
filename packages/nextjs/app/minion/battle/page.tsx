@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { NextPage } from "next";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
@@ -67,6 +68,13 @@ const RestMinion: NextPage = () => {
             <span className="font-bold ml-1">DP</span>
           </div>
         </div>
+        <Image
+          className="mb-3"
+          src="https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmY318Vg6nhmApuFgAf3oipjGxLBKjYvt5m1hPA77nk5ZB"
+          width={150}
+          height={150}
+          alt="Thief"
+        />
         <button
           className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
           onClick={async () => {
