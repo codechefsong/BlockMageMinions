@@ -7,38 +7,43 @@ const Explore: NextPage = () => {
   return (
     <div className="flex items-center flex-col flex-grow pt-7">
       <h1 className="text-2xl mb-3">Dashboard</h1>
-      <div className="flex flex-wrap w-[600px]">
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+      <div className="flex flex-wrap w-[630px]">
+        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
           <Link href="/marketplace/minion" passHref className="link">
             Create Minion
           </Link>
         </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
+          <Link href="/minion/manage" passHref className="link">
+            Manage Minion
+          </Link>
+        </div>
+        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
           <Link href="/minion/train" passHref className="link">
             Train Minion
           </Link>
         </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
           <Link href="/minion/rest" passHref className="link">
             Rest Minion
           </Link>
         </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
           <Link href="/minion/gather" passHref className="link">
             Gather Material
           </Link>
         </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
           <Link href="/minion/battle" passHref className="link">
             Battle Thief
           </Link>
         </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
           <Link href="/marketplace/item" passHref className="link">
             Shop Item
           </Link>
         </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
           <Link href="/marketplace/material" passHref className="link">
             Shop Material
           </Link>

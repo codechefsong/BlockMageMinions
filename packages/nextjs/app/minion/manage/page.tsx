@@ -11,7 +11,7 @@ import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaf
 
 const CHAIN_ID = 31337;
 
-const CreateMinion: NextPage = () => {
+const ManageMinion: NextPage = () => {
   const { address } = useAccount();
 
   const [selectedNFT, setSelectNFT] = useState(-1);
@@ -52,40 +52,9 @@ const CreateMinion: NextPage = () => {
     <div>
       <BackButton />
       <div className="flex items-center flex-col flex-grow">
-        <h1 className="text-center mb-5">
-          <span className="block text-3xl mb-2">Buy a Minion NFT</span>
-        </h1>
-
-        <center>
-          <Image
-            className="mb-3"
-            src="https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmZx4FuZqqSQ9f3MMnsX46ts4RXufRSMAH2byyYy9bqPkH"
-            width={150}
-            height={150}
-            alt="Minions"
-          />
-
-          <button
-            className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
-            onClick={async () => {
-              try {
-                await Game({
-                  functionName: "createMinion",
-                  // @ts-ignore
-                  args: [""],
-                });
-              } catch (e) {
-                console.error("Error minting Minion:", e);
-              }
-            }}
-          >
-            Buy
-          </button>
-        </center>
-
         <div className="px-5 mt-5">
           <h1 className="text-center mb-5">
-            <span className="block text-3xl mb-2">Your Minion NFT</span>
+            <span className="block text-3xl mb-2">Select your Minion NFT</span>
           </h1>
 
           {selectedNFT != -1 && (
@@ -119,10 +88,28 @@ const CreateMinion: NextPage = () => {
               </div>
             ))}
           </div>
+
+          <center>
+            <button
+              className="py-2 px-16 mb-10 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+              onClick={async () => {
+                try {
+                  await Game({
+                    functionName: "createTBA",
+                    args: [BigInt(CHAIN_ID), BigInt("1"), BigInt(selectedNFT), "0x"],
+                  });
+                } catch (e) {
+                  console.error("Error minting Minion:", e);
+                }
+              }}
+            >
+              Set Active
+            </button>
+          </center>
         </div>
       </div>
     </div>
   );
 };
 
-export default CreateMinion;
+export default ManageMinion;
