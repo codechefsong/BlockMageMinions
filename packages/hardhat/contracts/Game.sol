@@ -131,8 +131,8 @@ contract Game {
   function useFoodItem() public {
     items.burnItem(msg.sender, 1);
     address minionAddress = activeMinion[msg.sender];
-    if (usedStaminaPoints[minionAddress] >= 100) {
-      usedStaminaPoints[minionAddress] -= 100;
+    if (usedStaminaPoints[minionAddress] >= 50) {
+      usedStaminaPoints[minionAddress] -= 50;
     } else {
       usedStaminaPoints[minionAddress] = 0;
     }

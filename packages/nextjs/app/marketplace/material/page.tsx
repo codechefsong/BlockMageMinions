@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { NextPage } from "next";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
@@ -53,6 +54,13 @@ const ShopMaterial: NextPage = () => {
         </div>
         <div className="flex">
           <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+            <Image
+              className="mb-3"
+              src="https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmNq1X8AauGgsMRMkd35Y5hVwVvwsEqwJuzWYzufpJPUSS"
+              width={150}
+              height={150}
+              alt="Wood"
+            />
             <h2>Wood</h2>
             <p>Sell for: {prices && prices[0]?.toString()} RC</p>
             <p>Owned {WoodBalance?.toString()}</p>
@@ -73,6 +81,13 @@ const ShopMaterial: NextPage = () => {
             </button>
           </div>
           <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+            <Image
+              className="mb-3"
+              src="https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmYaqqPQ5r4Fqr1qXTQXQnEE3Kgx5mVvBAGWvK7CPn81UC"
+              width={175}
+              height={175}
+              alt="Iron"
+            />
             <h2>Iron</h2>
             <p>Sell for: {prices && prices[1]?.toString()} RC</p>
             <p>Owned {IronBalance?.toString()}</p>
@@ -93,6 +108,13 @@ const ShopMaterial: NextPage = () => {
             </button>
           </div>
           <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+            <Image
+              className="mb-3"
+              src="https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmcFu3aZCnVbMyAwuscbTJDfSm6XpprRAXGPJdEb1Nw87B"
+              width={175}
+              height={175}
+              alt="Steel"
+            />
             <h2>Steel</h2>
             <p>Sell for: {prices && prices[2]?.toString()} RC</p>
             <p>Owned {SteelBalance?.toString()}</p>

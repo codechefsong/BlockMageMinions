@@ -60,8 +60,15 @@ const ShopItem: NextPage = () => {
         </div>
         <div className="flex">
           <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
+            <Image
+              className="mb-3"
+              src="https://olive-exceptional-viper-654.mypinata.cloud/ipfs/QmPr7Cde4XLrsUih9TaVfLbkgnsXMhF4Pv1d9qgRiGPpQg"
+              width={60}
+              height={60}
+              alt="Food"
+            />
             <h2>Food</h2>
-            <p>Restore 20 SP</p>
+            <p>Restore 50 SP</p>
             <p>Cost: {prices && prices[0]?.toString()} RC</p>
             <p>Owned {foodBalance?.toString()}</p>
             <button
