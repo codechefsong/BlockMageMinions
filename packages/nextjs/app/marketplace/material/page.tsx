@@ -61,9 +61,11 @@ const ShopMaterial: NextPage = () => {
               height={150}
               alt="Wood"
             />
-            <h2>Wood</h2>
-            <p>Sell for: {prices && prices[0]?.toString()} RC</p>
-            <p>Owned {WoodBalance?.toString()}</p>
+            <div>
+              <h2 className="font-bold text-lg">Wood</h2>
+              <p>Sell for: {prices && prices[0]?.toString()} RC</p>
+              <p>Owned {WoodBalance?.toString()}</p>
+            </div>
             <button
               className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
               onClick={async () => {
@@ -88,9 +90,11 @@ const ShopMaterial: NextPage = () => {
               height={175}
               alt="Iron"
             />
-            <h2>Iron</h2>
-            <p>Sell for: {prices && prices[1]?.toString()} RC</p>
-            <p>Owned {IronBalance?.toString()}</p>
+            <div>
+              <h2 className="font-bold text-lg">Iron</h2>
+              <p>Sell for: {prices && prices[1]?.toString()} RC</p>
+              <p>Owned {IronBalance?.toString()}</p>
+            </div>
             <button
               className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
               onClick={async () => {
@@ -115,9 +119,11 @@ const ShopMaterial: NextPage = () => {
               height={175}
               alt="Steel"
             />
-            <h2>Steel</h2>
-            <p>Sell for: {prices && prices[2]?.toString()} RC</p>
-            <p>Owned {SteelBalance?.toString()}</p>
+            <div>
+              <h2 className="font-bold text-lg">Steel</h2>
+              <p>Sell for: {prices && prices[2]?.toString()} RC</p>
+              <p>Owned {SteelBalance?.toString()}</p>
+            </div>
             <button
               className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
               onClick={async () => {

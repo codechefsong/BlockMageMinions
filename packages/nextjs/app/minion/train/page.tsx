@@ -3,6 +3,7 @@
 import type { NextPage } from "next";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
+import { Address } from "~~/components/scaffold-eth";
 import { BackButton } from "~~/components/ui/BackButton";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
@@ -45,29 +46,15 @@ const TrainMinion: NextPage = () => {
     <div>
       <BackButton />
       <div className="flex items-center flex-col flex-grow">
-        <h1>{tbaAddress}</h1>
-        <div className="text-xl">
-          Stamina Point: {usedsp?.toString()} {" / "}
-          <div className="inline-flex items-center justify-center">
-            {parseFloat(formatEther(sp || 0n))}
-            <span className="font-bold ml-1">SP</span>
-          </div>
+        <div>
+          <h1>
+            <span className="block text-3xl mb-2">Train your Minion</span>
+            <Address address={tbaAddress} />
+          </h1>
+
+          <p className="text-gray-500">Make your minion stronger</p>
+          <p className="text-gray-500">It costs 20 stamina points (SP) to train.</p>
         </div>
-        <div className="text-xl">
-          Magic Point:{" "}
-          <div className="inline-flex items-center justify-center">
-            {parseFloat(formatEther(mp || 0n))}
-            <span className="font-bold ml-1">MP</span>
-          </div>
-        </div>
-        <div className="text-xl">
-          Defense Point:{" "}
-          <div className="inline-flex items-center justify-center">
-            {parseFloat(formatEther(dp || 0n))}
-            <span className="font-bold ml-1">DP</span>
-          </div>
-        </div>
-        <p>Cost 20 SP</p>
         <button
           className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
           onClick={async () => {
@@ -113,6 +100,28 @@ const TrainMinion: NextPage = () => {
         >
           Train Defense
         </button>
+
+        <div className="text-xl mt-5">
+          Stamina Point: {usedsp?.toString()} {" / "}
+          <div className="inline-flex items-center justify-center">
+            {parseFloat(formatEther(sp || 0n))}
+            <span className="font-bold ml-1">SP</span>
+          </div>
+        </div>
+        <div className="text-xl">
+          Magic Point:{" "}
+          <div className="inline-flex items-center justify-center">
+            {parseFloat(formatEther(mp || 0n))}
+            <span className="font-bold ml-1">MP</span>
+          </div>
+        </div>
+        <div className="text-xl">
+          Defense Point:{" "}
+          <div className="inline-flex items-center justify-center">
+            {parseFloat(formatEther(dp || 0n))}
+            <span className="font-bold ml-1">DP</span>
+          </div>
+        </div>
       </div>
     </div>
   );

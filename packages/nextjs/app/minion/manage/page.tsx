@@ -53,9 +53,11 @@ const ManageMinion: NextPage = () => {
       <BackButton />
       <div className="flex items-center flex-col flex-grow">
         <div className="px-5 mt-5">
-          <h1 className="text-center mb-5">
-            <span className="block text-3xl mb-2">Select your Minion NFT</span>
+          <h1 className="text-center">
+            <span className="block text-3xl">Select your Minion NFT</span>
           </h1>
+
+          <p className="text-gray-500">Only active minion can play the game</p>
 
           {selectedNFT != -1 && (
             <div>

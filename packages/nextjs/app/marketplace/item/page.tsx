@@ -67,10 +67,12 @@ const ShopItem: NextPage = () => {
               height={60}
               alt="Food"
             />
-            <h2>Food</h2>
-            <p>Restore 50 SP</p>
-            <p>Cost: {prices && prices[0]?.toString()} RC</p>
-            <p>Owned {foodBalance?.toString()}</p>
+            <div>
+              <h2 className="font-bold text-lg">Food</h2>
+              <p>Restore 50 SP</p>
+              <p>Cost: {prices && prices[0]?.toString()} RC</p>
+              <p>Owned {foodBalance?.toString()}</p>
+            </div>
             <button
               className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
               onClick={async () => {
@@ -109,10 +111,12 @@ const ShopItem: NextPage = () => {
               height={150}
               alt="Stamina Potion"
             />
-            <h2>Stamina Potion</h2>
-            <p>Inscrease 1 SP</p>
-            <p>Cost: {prices && prices[1]?.toString()} RC</p>
-            <p>Owned {StaminaPotionBalance?.toString()}</p>
+            <div>
+              <h2 className="font-bold text-lg">Stamina Potion</h2>
+              <p>Increase 1 SP</p>
+              <p>Cost: {prices && prices[1]?.toString()} RC</p>
+              <p>Owned {StaminaPotionBalance?.toString()}</p>
+            </div>
             <button
               className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
               onClick={async () => {
@@ -152,10 +156,12 @@ const ShopItem: NextPage = () => {
               height={150}
               alt="Magic Potion"
             />
-            <h2>Magic Potion</h2>
-            <p>Inscrease 1 MP</p>
-            <p>Cost: {prices && prices[2]?.toString()} RC</p>
-            <p>Owned {MagicPotionBalance?.toString()}</p>
+            <div>
+              <h2 className="font-bold text-lg">Magic Potion</h2>
+              <p>Increase 1 MP</p>
+              <p>Cost: {prices && prices[2]?.toString()} RC</p>
+              <p>Owned {MagicPotionBalance?.toString()}</p>
+            </div>
             <button
               className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
               onClick={async () => {
@@ -195,10 +201,12 @@ const ShopItem: NextPage = () => {
               height={150}
               alt="Defense Potion"
             />
-            <h2>Defense Potion</h2>
-            <p>Inscrease 1 DP</p>
-            <p>Cost: {prices && prices[3]?.toString()} RC</p>
-            <p>Owned {DefensePotionBalance?.toString()}</p>
+            <div>
+              <h2 className="font-bold text-lg">Defense Potion</h2>
+              <p>Increase 1 DP</p>
+              <p>Cost: {prices && prices[3]?.toString()} RC</p>
+              <p>Owned {DefensePotionBalance?.toString()}</p>
+            </div>
             <button
               className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
               onClick={async () => {

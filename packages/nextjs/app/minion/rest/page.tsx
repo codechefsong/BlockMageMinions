@@ -3,6 +3,7 @@
 import type { NextPage } from "next";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
+import { Address } from "~~/components/scaffold-eth";
 import { BackButton } from "~~/components/ui/BackButton";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
@@ -39,14 +40,15 @@ const RestMinion: NextPage = () => {
     <div>
       <BackButton />
       <div className="flex items-center flex-col flex-grow">
-        <h1>Rest your minion {tbaAddress}</h1>
-        <div className="text-xl">
-          Stamina Point: {usedsp?.toString()} {" / "}
-          <div className="inline-flex items-center justify-center">
-            {parseFloat(formatEther(sp || 0n))}
-            <span className="font-bold ml-1">SP</span>
-          </div>
+        <div>
+          <h1>
+            <span className="block text-3xl mb-2">Minion Resting</span>
+            <Address address={tbaAddress} />
+          </h1>
+          <p className="text-gray-500">Let your minion rest to fully recover stamina</p>
+          <p className="text-gray-500">They will be inactive during rest</p>
         </div>
+
         {!isRest ? (
           <button
             className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
@@ -78,6 +80,14 @@ const RestMinion: NextPage = () => {
             Awake up the minion
           </button>
         )}
+
+        <div className="text-xl mt-5">
+          Stamina Point: {usedsp?.toString()} {" / "}
+          <div className="inline-flex items-center justify-center">
+            {parseFloat(formatEther(sp || 0n))}
+            <span className="font-bold ml-1">SP</span>
+          </div>
+        </div>
       </div>
     </div>
   );

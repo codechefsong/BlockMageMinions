@@ -3,6 +3,7 @@
 import type { NextPage } from "next";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
+import { Address } from "~~/components/scaffold-eth";
 import { BackButton } from "~~/components/ui/BackButton";
 import {
   useScaffoldReadContract,
@@ -77,15 +78,15 @@ const GatherMaterials: NextPage = () => {
     <div>
       <BackButton />
       <div className="flex items-center flex-col flex-grow">
-        <h1>Gather Materials {tbaAddress}</h1>
-        <div className="text-xl">
-          Stamina Point: {usedsp?.toString()} {" / "}
-          <div className="inline-flex items-center justify-center">
-            {parseFloat(formatEther(sp || 0n))}
-            <span className="font-bold ml-1">SP</span>
-          </div>
+        <div>
+          <h1>
+            <span className="block text-3xl mb-2">Gather Materials</span>
+            <Address address={tbaAddress} />
+          </h1>
+
+          <p className="text-gray-500">Find a random material</p>
+          <p className="text-gray-500">It costs 50 stamina points (SP)</p>
         </div>
-        <p>Cost 50 SP</p>
         <button
           className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
           onClick={async () => {
@@ -100,6 +101,15 @@ const GatherMaterials: NextPage = () => {
         >
           Gather Material
         </button>
+
+        <div className="text-xl mx-5">
+          Stamina Point: {usedsp?.toString()} {" / "}
+          <div className="inline-flex items-center justify-center">
+            {parseFloat(formatEther(sp || 0n))}
+            <span className="font-bold ml-1">SP</span>
+          </div>
+        </div>
+
         <div className="flex">
           <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1">
             <h2>Wood</h2>

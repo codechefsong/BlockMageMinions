@@ -5,47 +5,47 @@ import type { NextPage } from "next";
 
 const Explore: NextPage = () => {
   return (
-    <div className="flex items-center flex-col flex-grow pt-7">
-      <h1 className="text-2xl mb-3">Dashboard</h1>
-      <div className="flex flex-wrap w-[630px]">
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
+    <div className="flex flex-col items-center flex-grow pt-7 bg-gray-50 min-h-screen">
+      <h1 className="text-3xl mb-8 font-semibold text-gray-800">Dashboard</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-4xl">
+        <div className="flex flex-col bg-orange-200 hover:bg-orange-300 transition-colors p-6 text-center items-center rounded-xl shadow-lg m-1 w-full">
           <Link href="/marketplace/minion" passHref className="link">
-            Create Minion
+            <p className="text-lg font-medium text-gray-800">Create Minion</p>
           </Link>
         </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
+        <div className="flex flex-col bg-blue-200 hover:bg-blue-300 transition-colors p-6 text-center items-center rounded-xl shadow-lg m-1 w-full">
           <Link href="/minion/manage" passHref className="link">
-            Manage Minion
+            <p className="text-lg font-medium text-gray-800">Manage Minion</p>
           </Link>
         </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
+        <div className="flex flex-col bg-green-200 hover:bg-green-300 transition-colors p-6 text-center items-center rounded-xl shadow-lg m-1 w-full">
           <Link href="/minion/train" passHref className="link">
-            Train Minion
+            <p className="text-lg font-medium text-gray-800">Train Minion</p>
           </Link>
         </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
+        <div className="flex flex-col bg-purple-200 hover:bg-purple-300 transition-colors p-6 text-center items-center rounded-xl shadow-lg m-1 w-full">
           <Link href="/minion/rest" passHref className="link">
-            Rest Minion
+            <p className="text-lg font-medium text-gray-800">Rest Minion</p>
           </Link>
         </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
+        <div className="flex flex-col bg-teal-200 hover:bg-teal-300 transition-colors p-6 text-center items-center rounded-xl shadow-lg m-1 w-full">
           <Link href="/minion/gather" passHref className="link">
-            Gather Material
+            <p className="text-lg font-medium text-gray-800">Gather Material</p>
           </Link>
         </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
+        <div className="flex flex-col bg-red-200 hover:bg-red-300 transition-colors p-6 text-center items-center rounded-xl shadow-lg m-1 w-full">
           <Link href="/minion/battle" passHref className="link">
-            Battle Thief
+            <p className="text-lg font-medium text-gray-800">Battle Thief</p>
           </Link>
         </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
+        <div className="flex flex-col bg-yellow-200 hover:bg-yellow-300 transition-colors p-6 text-center items-center rounded-xl shadow-lg m-1 w-full">
           <Link href="/marketplace/item" passHref className="link">
-            Shop Item
+            <p className="text-lg font-medium text-gray-800">Shop Item</p>
           </Link>
         </div>
-        <div className="flex flex-col bg-orange-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl m-1 w-[200px]">
+        <div className="flex flex-col bg-pink-200 hover:bg-pink-300 transition-colors p-6 text-center items-center rounded-xl shadow-lg m-1 w-full">
           <Link href="/marketplace/material" passHref className="link">
-            Shop Material
+            <p className="text-lg font-medium text-gray-800">Shop Material</p>
           </Link>
         </div>
       </div>
