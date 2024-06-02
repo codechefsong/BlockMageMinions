@@ -9,7 +9,7 @@ import { BackButton } from "~~/components/ui/BackButton";
 import deployedContracts from "~~/contracts/deployedContracts";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
-const CHAIN_ID = 59141;
+const CHAIN_ID = 31337;
 
 const CreateMinion: NextPage = () => {
   const { address } = useAccount();
