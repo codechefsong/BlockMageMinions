@@ -1,6 +1,9 @@
 //SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
+import {VRFConsumerBaseV2Plus} from "@chainlink/contracts/src/v0.8/vrf/dev/VRFConsumerBaseV2Plus.sol";
+import {VRFV2PlusClient} from "@chainlink/contracts/src/v0.8/vrf/dev/libraries/VRFV2PlusClient.sol";
+
 import "./ERC6551Registry.sol";
 import "./MinionNFT.sol";
 import "./RuneCredit.sol";
@@ -9,7 +12,7 @@ import "./MagicPoint.sol";
 import "./DefensePoint.sol";
 import "./Items.sol";
 
-contract Game {
+contract Game is VRFConsumerBaseV2Plus {
   ERC6551Registry public registry;
   MinionNFT public minionNFT;
   RuneCredit public runeCredit;
@@ -18,7 +21,7 @@ contract Game {
   DefensePoint public defensePoint;
   Items public items;
 
-  address public immutable owner;
+  address public immutable gameowner;
   bool public premium = false;
   uint256 public totalCounter = 0;
   mapping(address => address) public activeMinion;
@@ -26,11 +29,22 @@ contract Game {
   mapping(address => uint256) public restCoolDown;
   mapping(address => bool) public isRest;
 
+  uint256 private constant ROLL_IN_PROGRESS = 42;
   uint256 public constant COOLDOWNTIME = 100;
+  uint256 private RandomNumber = 0;
+
+  uint256 public s_subscriptionId;
+  address public vrfCoordinator = 0x343300b5d84D444B2ADc9116FEF1bED02BE49Cf2;
+  bytes32 public s_keyHash = 0x816bedba8a50b294e5cbd47842baf240c2385f2eaf719edbd4f250a137a8c899;
+  uint32 public callbackGasLimit = 40000;
+  uint16 public requestConfirmations = 3;
+  uint32 public numWords = 1;
 
   event NewMaterial(address indexed owner, uint8 itemID, uint8 amount);
   event EaredCreditFromThief(address indexed owner, uint256 amount);
-
+  event DiceRolled(uint256 indexed requestId, address indexed roller);
+  event DiceLanded(uint256 indexed requestId, uint256 indexed result);
+  
   constructor(
     address _owner,
     address _registryAddress,
@@ -39,9 +53,12 @@ contract Game {
     address _staminaPointAddress,
     address _magicPointAddress,
     address _defensePointAddress,
-    address _itemAddress
-  ) {
-    owner = _owner;
+    address _itemAddress,
+    uint256 subscriptionId
+  )
+  VRFConsumerBaseV2Plus(vrfCoordinator) 
+  {
+    gameowner = _owner;
     registry = ERC6551Registry(_registryAddress);
     minionNFT = MinionNFT(_minionNFTAddress);
     runeCredit = RuneCredit(_runeCreditAddress);
@@ -49,10 +66,11 @@ contract Game {
     magicPoint = MagicPoint(_magicPointAddress);
     defensePoint = DefensePoint(_defensePointAddress);
     items = Items(_itemAddress);
+    s_subscriptionId = subscriptionId;
   }
 
   modifier isOwner() {
-    require(msg.sender == owner, "Not the Owner");
+    require(msg.sender == gameowner, "Not the Owner");
     _;
   }
 
@@ -201,8 +219,30 @@ contract Game {
     emit EaredCreditFromThief(msg.sender, magicPoint.balanceOf(minionAddress));
   }
 
+  function getRandomNumber() internal returns (uint256 requestId) {
+    requestId = s_vrfCoordinator.requestRandomWords(
+        VRFV2PlusClient.RandomWordsRequest({
+            keyHash: s_keyHash,
+            subId: s_subscriptionId,
+            requestConfirmations: requestConfirmations,
+            callbackGasLimit: callbackGasLimit,
+            numWords: numWords,
+            // Set nativePayment to true to pay for VRF requests with Sepolia ETH instead of LINK
+            extraArgs: VRFV2PlusClient._argsToBytes(VRFV2PlusClient.ExtraArgsV1({nativePayment: false}))
+        })
+    );
+  }
+
+  function fulfillRandomWords(
+    uint256 requestId,
+    uint256[] calldata randomWords
+  ) internal override {
+    uint256 d20Value = (randomWords[0]);
+    RandomNumber = d20Value;
+  }
+
   function withdraw() public isOwner {
-    (bool success, ) = owner.call{ value: address(this).balance }("");
+    (bool success, ) = gameowner.call{ value: address(this).balance }("");
     require(success, "Failed to send Ether");
   }
 
