@@ -187,7 +187,7 @@ contract Game is VRFConsumerBaseV2Plus {
     address minionAddress = activeMinion[msg.sender];
     usedStaminaPoints[minionAddress] += 50;
 
-    uint256 randomNumber = uint256(keccak256(abi.encode(block.timestamp, msg.sender))) % 10;
+    uint256 randomNumber = uint256(keccak256(abi.encode(block.timestamp, msg.sender, RandomNumber))) % 10;
 
     if (randomNumber > 8) {
       items.mintMaterials(msg.sender, 7, 1);
