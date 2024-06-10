@@ -104,13 +104,13 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     autoMine: true,
   });
 
+  const Game = await hre.ethers.getContract<Contract>("Game", deployer);
   // Get the deployed contract to interact with it after deploying.
-  // const yourContract = await hre.ethers.getContract<Contract>("YourContract", deployer);
-  // console.log("👋 Initial greeting:", await yourContract.greeting());
+  console.log("👋 Add game as admin:", await RuneCredit.addAdmin(await Game.getAddress()));
 };
 
 export default deployYourContract;
 
 // Tags are useful if you have multiple deploy files and only want to run one of them.
 // e.g. yarn deploy --tags YourContract
-deployYourContract.tags = ["YourContract"];
+deployYourContract.tags = ["Game"];
