@@ -5,6 +5,7 @@ import Image from "next/image";
 import type { NextPage } from "next";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
+import { Address } from "~~/components/scaffold-eth";
 import { BackButton } from "~~/components/ui/BackButton";
 import deployedContracts from "~~/contracts/deployedContracts";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
@@ -46,6 +47,18 @@ const ManageMinion: NextPage = () => {
     args: [tbaAddress],
   });
 
+  const { data: mp } = useScaffoldReadContract({
+    contractName: "MagicPoint",
+    functionName: "balanceOf",
+    args: [tbaAddress],
+  });
+
+  const { data: dp } = useScaffoldReadContract({
+    contractName: "DefensePoint",
+    functionName: "balanceOf",
+    args: [tbaAddress],
+  });
+
   const { writeContractAsync: Game } = useScaffoldWriteContract("Game");
 
   return (
@@ -59,20 +72,7 @@ const ManageMinion: NextPage = () => {
 
           <p className="text-gray-500">Only active minion can play the game</p>
 
-          {selectedNFT != -1 && (
-            <div>
-              <p>{tbaAddress}</p>
-              <div className="text-xl">
-                Stamina Point: {usedsp?.toString()} {" / "}
-                <div className="inline-flex items-center justify-center">
-                  {parseFloat(formatEther(sp || 0n))}
-                  <span className="font-bold ml-1">SP</span>
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div className="flex">
+          <div className="flex mb-5">
             {nfts?.map((n, index) => (
               <div
                 key={index}
@@ -90,6 +90,33 @@ const ManageMinion: NextPage = () => {
               </div>
             ))}
           </div>
+
+          {selectedNFT != -1 && (
+            <div>
+              <Address address={tbaAddress} />
+              <div className="text-xl">
+                Stamina Point: {usedsp?.toString()} {" / "}
+                <div className="inline-flex items-center justify-center">
+                  {parseFloat(formatEther(sp || 0n))}
+                  <span className="font-bold ml-1">SP</span>
+                </div>
+              </div>
+              <div className="text-xl">
+                Magic Point:{" "}
+                <div className="inline-flex items-center justify-center">
+                  {parseFloat(formatEther(mp || 0n))}
+                  <span className="font-bold ml-1">MP</span>
+                </div>
+              </div>
+              <div className="text-xl">
+                Defense Point:{" "}
+                <div className="inline-flex items-center justify-center">
+                  {parseFloat(formatEther(dp || 0n))}
+                  <span className="font-bold ml-1">DP</span>
+                </div>
+              </div>
+            </div>
+          )}
 
           <center>
             <button
