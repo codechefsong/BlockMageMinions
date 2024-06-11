@@ -25,6 +25,7 @@ contract Game {
   mapping(address => uint256) public usedStaminaPoints;
   mapping(address => uint256) public restCoolDown;
   mapping(address => bool) public isRest;
+  mapping(address => bool) public isClaim;
 
   uint256 public constant COOLDOWNTIME = 100;
 
@@ -80,7 +81,10 @@ contract Game {
 
   function createMinion(string calldata _tokenURI) public {
     minionNFT.mint(msg.sender, _tokenURI);
-    runeCredit.mint(msg.sender, 10000000000000000000000);
+    if (isClaim[msg.sender] == false) {
+      runeCredit.mint(msg.sender, 10000000000000000000000);
+      isClaim[msg.sender] = true;
+    }
   }
 
    function createTBA(
