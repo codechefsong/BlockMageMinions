@@ -4,9 +4,11 @@ import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { formatEther } from "viem";
+import { useAccount } from "wagmi";
 import { Bars3Icon, BugAntIcon, GlobeAltIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
-import { useOutsideClick } from "~~/hooks/scaffold-eth";
+import { useOutsideClick, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 type HeaderMenuLink = {
   label: string;
@@ -68,6 +70,14 @@ export const Header = () => {
     useCallback(() => setIsDrawerOpen(false), []),
   );
 
+  const { address } = useAccount();
+
+  const { data: runeCredit } = useScaffoldReadContract({
+    contractName: "RuneCredit",
+    functionName: "balanceOf",
+    args: [address],
+  });
+
   return (
     <div className="sticky lg:static top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2">
       <div className="navbar-start w-auto lg:w-1/2">
@@ -111,6 +121,10 @@ export const Header = () => {
         </ul>
       </div>
       <div className="navbar-end flex-grow mr-4">
+        <p className="mr-2">
+          {parseFloat(formatEther(runeCredit || 0n))}
+          <span className="font-bold ml-1">RC</span>
+        </p>
         <RainbowKitCustomConnectButton />
         <FaucetButton />
       </div>
