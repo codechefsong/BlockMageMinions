@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import type { NextPage } from "next";
-import { formatEther } from "viem";
 import { useAccount } from "wagmi";
+import { Address } from "~~/components/scaffold-eth";
 import { BackButton } from "~~/components/ui/BackButton";
 import deployedContracts from "~~/contracts/deployedContracts";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
@@ -32,18 +32,6 @@ const CreateMinion: NextPage = () => {
       BigInt(selectedNFT),
       BigInt("1"),
     ],
-  });
-
-  const { data: sp } = useScaffoldReadContract({
-    contractName: "StaminaPoint",
-    functionName: "balanceOf",
-    args: [tbaAddress],
-  });
-
-  const { data: usedsp } = useScaffoldReadContract({
-    contractName: "Game",
-    functionName: "getStaminaPointsLeft",
-    args: [tbaAddress],
   });
 
   const { writeContractAsync: Game } = useScaffoldWriteContract("Game");
@@ -94,14 +82,7 @@ const CreateMinion: NextPage = () => {
 
           {selectedNFT != -1 && (
             <div>
-              <p>{tbaAddress}</p>
-              <div className="text-xl">
-                Stamina Point: {usedsp?.toString()} {" / "}
-                <div className="inline-flex items-center justify-center">
-                  {parseFloat(formatEther(sp || 0n))}
-                  <span className="font-bold ml-1">SP</span>
-                </div>
-              </div>
+              <Address address={tbaAddress} />
             </div>
           )}
 
