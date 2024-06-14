@@ -13,6 +13,7 @@ const Explore: NextPage = () => {
     { href: "/minion/battle", label: "Battle Thief", bg: "bg-red-200", hoverBg: "hover:bg-red-300" },
     { href: "/marketplace/item", label: "Shop Item", bg: "bg-yellow-200", hoverBg: "hover:bg-yellow-300" },
     { href: "/marketplace/material", label: "Shop Material", bg: "bg-pink-200", hoverBg: "hover:bg-pink-300" },
+    { href: "/runetree", label: "Rune Tree", bg: "bg-cyan-200", hoverBg: "hover:bg-cyan-300" },
   ];
 
   return (
