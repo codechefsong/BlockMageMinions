@@ -26,6 +26,15 @@ contract Game {
   mapping(address => uint256) public restCoolDown;
   mapping(address => bool) public isRest;
   mapping(address => bool) public isClaim;
+  address[] public currentRuneTrees;
+  mapping(address => RuneTree) public addressToRuneTree;
+
+  struct RuneTree {
+    address owner;
+    uint256 amount;
+    uint256 startdate;
+    uint256 defensePoint;
+  }
 
   uint256 public constant COOLDOWNTIME = 100;
 
@@ -191,7 +200,6 @@ contract Game {
 
   function attackThief() hasEnoughSP(5) public {
     address minionAddress = activeMinion[msg.sender];
-
     uint256 defense = defensePoint.balanceOf(minionAddress) / 1000000000000000000;
 
     if (defense >= 45) {
@@ -203,6 +211,17 @@ contract Game {
     
     runeCredit.mint(msg.sender, magicPoint.balanceOf(minionAddress));
     emit EaredCreditFromThief(msg.sender, magicPoint.balanceOf(minionAddress));
+  }
+
+  function stakeAndCreateRuneTree(uint256 _amount) public {
+    require(runeCredit.balanceOf(msg.sender) >= _amount, "Not enough rune credit");
+    runeCredit.burn(msg.sender, _amount);
+
+    address minionAddress = activeMinion[msg.sender];
+    uint256 defense = defensePoint.balanceOf(minionAddress);
+    
+    currentRuneTrees.push(msg.sender);
+    addressToRuneTree[msg.sender] = RuneTree(msg.sender, _amount,  block.timestamp, defense);
   }
 
   function withdraw() public isOwner {
