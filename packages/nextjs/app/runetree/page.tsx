@@ -2,9 +2,16 @@
 
 import Link from "next/link";
 import type { NextPage } from "next";
+import { Address } from "~~/components/scaffold-eth";
 import { BackButton } from "~~/components/ui/BackButton";
+import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 const RuneTree: NextPage = () => {
+  const { data: currentRuneTrees } = useScaffoldReadContract({
+    contractName: "Game",
+    functionName: "getCurrentRuneTrees",
+  });
+
   return (
     <div>
       <BackButton />
@@ -22,10 +29,20 @@ const RuneTree: NextPage = () => {
           passHref
           className=" py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-400 disabled:opacity-50"
         >
-          Stake
+          Go to Stake
         </Link>
 
-        <p className="text-red-500">Comming Soon...</p>
+        <p className="text-2xl">Current Rune Trees</p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-4xl">
+          {currentRuneTrees?.map((tree, index) => (
+            <div className="bg-teal-200 flex flex-col transition-colors p-6 text-center items-center rounded-xl shadow-lg m-1 w-full" key={index}>
+              <Address address={tree} />
+            </div>
+          ))}
+        </div>
+       
+        {/* <p className="text-red-500">Comming Soon...</p> */}
       </div>
     </div>
   );

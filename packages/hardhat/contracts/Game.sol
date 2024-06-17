@@ -88,6 +88,10 @@ contract Game {
     return isRest[minionAddress];
   }
 
+  function getCurrentRuneTrees() public view returns (address[] memory) {
+    return currentRuneTrees;
+  }
+
   function createMinion(string calldata _tokenURI) public {
     minionNFT.mint(msg.sender, _tokenURI);
     if (isClaim[msg.sender] == false) {
