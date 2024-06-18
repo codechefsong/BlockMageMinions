@@ -36,12 +36,14 @@ const RuneTree: NextPage = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full max-w-4xl">
           {currentRuneTrees?.map((tree, index) => (
-            <div className="bg-teal-200 flex flex-col transition-colors p-6 text-center items-center rounded-xl shadow-lg m-1 w-full" key={index}>
+            <div
+              className="bg-teal-200 flex flex-col transition-colors p-6 text-center items-center rounded-xl shadow-lg m-1 w-full"
+              key={index}
+            >
               <Address address={tree} />
             </div>
           ))}
         </div>
-       
         {/* <p className="text-red-500">Comming Soon...</p> */}
       </div>
     </div>

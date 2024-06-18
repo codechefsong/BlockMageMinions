@@ -13,7 +13,7 @@ const RuneTree: NextPage = () => {
 
   return (
     <div>
-      <BackButton />
+      <BackButton path="/runetree" />
       <div className="flex flex-col items-center flex-grow pt-7 bg-gray-50 min-h-screen">
         <div>
           <h1>
