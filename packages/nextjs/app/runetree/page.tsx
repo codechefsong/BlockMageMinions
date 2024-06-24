@@ -41,6 +41,13 @@ const RuneTree: NextPage = () => {
               key={index}
             >
               <Address address={tree} />
+              <Link
+                href={`/runetree/tree/${tree}`}
+                passHref
+                className=" py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-400 disabled:opacity-50"
+              >
+                View
+              </Link>
             </div>
           ))}
         </div>
