@@ -92,6 +92,10 @@ contract Game {
     return currentRuneTrees;
   }
 
+  function getUserRuneTree(address _owner) public view returns (RuneTree memory) {
+    return addressToRuneTree[_owner];
+  }
+
   function createMinion(string calldata _tokenURI) public {
     minionNFT.mint(msg.sender, _tokenURI);
     if (isClaim[msg.sender] == false) {
@@ -100,7 +104,7 @@ contract Game {
     }
   }
 
-   function createTBA(
+  function createTBA(
     uint256 _chainId,
     uint256 _salt,
     uint256 _tokenId,

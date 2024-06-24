@@ -2,13 +2,23 @@
 
 import { useState } from "react";
 import type { NextPage } from "next";
-import { parseEther } from "viem";
+import { formatEther, parseEther } from "viem";
+import { useAccount } from "wagmi";
 import { IntegerInput } from "~~/components/scaffold-eth";
 import { BackButton } from "~~/components/ui/BackButton";
-import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
 const RuneTree: NextPage = () => {
+  const { address } = useAccount();
+
   const [amountToStake, setAmountToStake] = useState<string | bigint>("");
+
+  const { data: runeTrees } = useScaffoldReadContract({
+    contractName: "Game",
+    functionName: "getUserRuneTree",
+    args: [address],
+  });
+
   const { writeContractAsync: Game } = useScaffoldWriteContract("Game");
 
   return (
@@ -48,6 +58,18 @@ const RuneTree: NextPage = () => {
         >
           Stake
         </button>
+
+        <div>
+          <h2 className="mt-3 text-2xl">Your Rune Tree</h2>
+          <p className="mr-2">
+            Amount: {parseFloat(formatEther(runeTrees?.amount || 0n))}
+            <span className="font-bold ml-1">RC</span>
+          </p>
+          <p className="mr-2">
+            Defense Point: {parseFloat(formatEther(runeTrees?.defensePoint || 0n))}
+            <span className="font-bold ml-1">DP</span>
+          </p>
+        </div>
       </div>
     </div>
   );
