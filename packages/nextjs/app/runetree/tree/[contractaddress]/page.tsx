@@ -30,6 +30,22 @@ const RuneTree: NextPage = () => {
           <p className="text-gray-500">Earn Rune Credits for attacking this Rune Tree</p>
         </div>
 
+        <button
+          className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+          onClick={async () => {
+            try {
+              await Game({
+                functionName: "attackTree",
+                args: [address],
+              });
+            } catch (e) {
+              console.error("Error attacking thief:", e);
+            }
+          }}
+        >
+          Attack
+        </button>
+
         <div>
           <p className="mr-2">
             Amount: {parseFloat(formatEther(runeTrees?.amount || 0n))}

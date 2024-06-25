@@ -232,6 +232,21 @@ contract Game {
     addressToRuneTree[msg.sender] = RuneTree(msg.sender, _amount,  block.timestamp, defense);
   }
 
+  function attackTree(address _tree) hasEnoughSP(20) public {
+    address minionAddress = activeMinion[msg.sender];
+    uint256 damage;
+
+    if (addressToRuneTree[_tree].defensePoint < magicPoint.balanceOf(minionAddress)) {
+      damage = addressToRuneTree[_tree].defensePoint - magicPoint.balanceOf(minionAddress);
+    } else{
+      damage = 1000000000000000000;
+    }
+
+    addressToRuneTree[_tree].amount -= damage;
+    
+    runeCredit.mint(msg.sender, damage);
+  }
+
   function withdraw() public isOwner {
     (bool success, ) = owner.call{ value: address(this).balance }("");
     require(success, "Failed to send Ether");
