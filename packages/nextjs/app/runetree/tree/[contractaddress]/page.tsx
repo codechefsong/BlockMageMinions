@@ -1,23 +1,17 @@
 "use client";
 
-import type { NextPage } from "next";
 import { formatEther } from "viem";
-import { useAccount } from "wagmi";
 import { BackButton } from "~~/components/ui/BackButton";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
-const RuneTree: NextPage = () => {
-  const { address } = useAccount();
-
+const RuneTree = ({ params }: { params: { contractaddress: string } }) => {
   const { data: runeTrees } = useScaffoldReadContract({
     contractName: "Game",
     functionName: "getUserRuneTree",
-    args: [address],
+    args: [params.contractaddress],
   });
 
   const { writeContractAsync: Game } = useScaffoldWriteContract("Game");
-
-  console.log(Game);
 
   return (
     <div>
@@ -36,7 +30,7 @@ const RuneTree: NextPage = () => {
             try {
               await Game({
                 functionName: "attackTree",
-                args: [address],
+                args: [params.contractaddress],
               });
             } catch (e) {
               console.error("Error attacking thief:", e);
