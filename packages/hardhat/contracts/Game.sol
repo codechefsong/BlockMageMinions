@@ -68,6 +68,7 @@ contract Game {
 
   modifier hasEnoughSP(uint256 amount) {
     address minionAddress = activeMinion[msg.sender];
+    require(minionAddress != address(0), "You need an active minion");
     uint256 usedAmount = usedStaminaPoints[minionAddress] + amount;
     uint256 spAmount = staminaPoint.balanceOf(minionAddress);
     require(usedAmount * 1000000000000000000 <= spAmount, "Not not SP");
