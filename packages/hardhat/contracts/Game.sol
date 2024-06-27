@@ -233,6 +233,14 @@ contract Game {
     addressToRuneTree[msg.sender] = RuneTree(msg.sender, _amount,  block.timestamp, defense);
   }
 
+  function collectCredits(address _tree) public {
+    require(addressToRuneTree[_tree].owner == msg.sender, "You do not own this Rune Tree");
+
+    uint256 amount = block.timestamp - addressToRuneTree[_tree].startdate;
+    runeCredit.mint(msg.sender, amount);
+    addressToRuneTree[_tree].startdate = block.timestamp;
+  }
+
   function attackTree(address _tree) hasEnoughSP(20) public {
     address minionAddress = activeMinion[msg.sender];
     uint256 damage;
