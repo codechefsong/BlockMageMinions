@@ -233,6 +233,16 @@ contract Game {
     addressToRuneTree[msg.sender] = RuneTree(msg.sender, _amount,  block.timestamp, defense);
   }
 
+  function unStakeAndRemoveRuneTree() public {
+    require(addressToRuneTree[msg.sender].amount != 0, "You do not own this Rune Tree");
+
+    uint256 amount = block.timestamp - addressToRuneTree[msg.sender].startdate;
+    runeCredit.mint(msg.sender, amount);
+    runeCredit.mint(msg.sender, addressToRuneTree[msg.sender].amount);
+    
+    addressToRuneTree[msg.sender] = RuneTree(msg.sender, 0, 0, 0);
+  }
+
   function collectCredits(address _tree) public {
     require(addressToRuneTree[_tree].owner == msg.sender, "You do not own this Rune Tree");
 

@@ -61,21 +61,37 @@ const RuneTree: NextPage = () => {
             </button>
           </>
         ) : (
-          <button
-            className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
-            onClick={async () => {
-              try {
-                await Game({
-                  functionName: "collectCredits",
-                  args: [address],
-                });
-              } catch (e) {
-                console.error("Error collection credits:", e);
-              }
-            }}
-          >
-            Claim Credit
-          </button>
+          <>
+            <button
+              className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+              onClick={async () => {
+                try {
+                  await Game({
+                    functionName: "collectCredits",
+                    args: [address],
+                  });
+                } catch (e) {
+                  console.error("Error collection credits:", e);
+                }
+              }}
+            >
+              Claim Credit
+            </button>
+            <button
+              className="py-2 px-16 mb-1 mt-3 bg-green-500 rounded baseline hover:bg-green-300 disabled:opacity-50"
+              onClick={async () => {
+                try {
+                  await Game({
+                    functionName: "unStakeAndRemoveRuneTree",
+                  });
+                } catch (e) {
+                  console.error("Error collection credits:", e);
+                }
+              }}
+            >
+              UnStake
+            </button>
+          </>
         )}
 
         {runeTrees?.amount !== BigInt(0) && (
